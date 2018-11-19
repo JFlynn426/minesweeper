@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableCell from './TableCell'
-import MinesweeperData from './minesweeperboard.json'
+import axios from 'axios'
 class Table extends Component {
   constructor(props) {
     super(props)
@@ -8,17 +8,15 @@ class Table extends Component {
       status: ''
     }
   }
-
-  
-    boardID
-    let url = 'https://minesweeper-api.herokuapp.com/games'
-    axios.get(url).then(response => {this.setState({
-
-    })})
-  
-    let
-
-
+  updateBoard =() =>{
+    let url ='https://minesweeper-api.herokuapp.com/games'
+  }
+      axios.get(url).then(response => {
+        this.setState({
+   status: response.data["board"]
+      })
+    })
+  }
   render() {
     return (
       <button onClick={this.state.newGame()}></button>
