@@ -5,7 +5,7 @@ class TableCell extends Component {
     super(props)
 
     this.state = {
-      status: ''
+      cellStatus: ''
     }
   }
   flagCell = event => {

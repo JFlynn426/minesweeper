@@ -23,6 +23,10 @@ td {
   background-image: url('https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-11/256/united-states.png');
   background-size: 4vw 4vw;
 }
-.C {
+._ {
   background-color: white;
+}
+.bomb {
+}
+.flagged-bomb {
 }
