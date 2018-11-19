@@ -27,6 +27,11 @@ td {
   background-color: white;
 }
 .bomb {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Emoji_u1f4a3.svg/256px-Emoji_u1f4a3.svg.png');
+  background-size: 4vw 4vw;
+  background-color: red;
 }
 .flagged-bomb {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Emoji_u1f4a3.svg/256px-Emoji_u1f4a3.svg.png');
+  background-size: 4vw 4vw;
 }
