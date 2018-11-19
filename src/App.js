@@ -19,73 +19,102 @@ class App extends Component {
           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         ],
-        state: 'new',
+        state: 'Start your game!',
         mines: 10
       }
     }
   }
-  flagCell = event => {
-    event.preventDefault()
-    this.setState({
-      column: 'F'
-    })
-  }
-  openCell = event => {
-    this.setState({
-      column: 'C'
-    })
-  }
-  // classNameFlagBomb = () => {
-  //   if (this.props.status === 'F') {
-  //     return 'F'
-  //   }
-  //   if (this.props.status === '_') {
-  //     return '_'
-  //   }
-  //   if (this.props.status === '*') {
-  //     return 'bomb'
-  //   }
-  //   if (this.props.status === '@') {
-  //     return 'flagged-bomb'
-  //   }
-  // }
-  updateGame = () => {
-    let url = `https://minesweeper-api.herokuapp.com/games/${this.state.id}`
 
-    axios.get(url).then(response => {
+  openCell = (row, col) => {
+    axios
+      .post(
+        `https://minesweeper-api.herokuapp.com/games/${
+          this.state.status.id
+        }/check`,
+        {
+          id: this.state.status.id,
+          row: row,
+          col: col
+        }
+      )
+      .then(response => {
+        this.setState({
+          status: response.data
+        })
+      })
+  }
+
+  flagCell = (row, col) => {
+    axios
+      .post(
+        `https://minesweeper-api.herokuapp.com/games/${
+          this.state.status.id
+        }/flag`,
+        {
+          id: this.state.status.id,
+          row: row,
+          col: col
+        }
+      )
+      .then(response => {
+        this.setState({
+          status: response.data
+        })
+      })
+  }
+
+  newGame = event => {
+    let url = 'https://minesweeper-api.herokuapp.com/games'
+
+    axios.post(url).then(response => {
       this.setState({
         status: response.data
       })
     })
   }
-  newGame = () => {
-    let url = 'https://minesweeper-api.herokuapp.com/games/'
-
-    axios.get(url).then(response => {
-      this.setState({
-        id: response.data['id']
-      })
-    })
+  gameStatus = () => {
+    if (this.state.status.state === 'Start your game!') {
+      return 'Click New Game to Start!'
+    }
+    if (this.state.status.state === 'new') {
+      return 'Click a square!'
+    }
+    if (this.state.status.state === 'playing') {
+      return `Playing game ${this.state.status.id}`
+    }
+    if (this.state.status.state === 'won') {
+      return 'You won! Another game?'
+    }
+    if (this.state.status.state === 'lost') {
+      return 'You blew up sucka! Another game?'
+    }
   }
 
   render() {
     return (
       <div className="App">
         <h1>Minesweeper</h1>
-        <button onClick={this.newGame()}>New Game</button>
+        <h3>{this.gameStatus()}</h3>
+        <button onClick={this.newGame}>New Game</button>
         <table className="board">
           <tbody>
-            {this.state.status.board.map(row => {
-              return (
-                <tr onContextMenu={this.flagCell} onClick={this.openCell}>
-                  {row.map(column => (
-                    <TableCell status={column} />
-                  ))}
-                </tr>
-              )
-            })}
+            {this.state.status.board.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((value, columnIndex) => (
+                  <TableCell
+                    key={columnIndex}
+                    col={columnIndex}
+                    row={rowIndex}
+                    flagCell={this.flagCell}
+                    openCell={this.openCell}
+                    value={value}
+                  />
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
+        <h3>{this.state.status.mines} mines left</h3>
       </div>
     )
   }

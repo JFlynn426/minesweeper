@@ -6,6 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rebeccapurple;
+  color: orange;
 }
 
 code {
@@ -24,7 +26,8 @@ td {
   background-size: 4vw 4vw;
 }
 ._ {
-  background-color: white;
+  background-color: green;
+  display: hidden;
 }
 .bomb {
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Emoji_u1f4a3.svg/256px-Emoji_u1f4a3.svg.png');
@@ -34,4 +37,8 @@ td {
 .flagged-bomb {
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Emoji_u1f4a3.svg/256px-Emoji_u1f4a3.svg.png');
   background-size: 4vw 4vw;
+}
+button {
+  margin: 0 0 3vw 0;
+  background-color: yellow;
 }
