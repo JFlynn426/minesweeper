@@ -15,15 +15,16 @@ code {
     monospace;
 }
 tr {
-  width: 32vw;
+  width: 32vh;
 }
 td {
-  height: 4vw;
-  width: 4vw;
+  height: 4vh;
+
+  width: 4vh;
 }
 .F {
   background-image: url('https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-11/256/united-states.png');
-  background-size: 4vw 4vw;
+  background-size: 4vh 4vh;
 }
 ._ {
   background-color: green;
@@ -31,14 +32,17 @@ td {
 }
 .bomb {
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Emoji_u1f4a3.svg/256px-Emoji_u1f4a3.svg.png');
-  background-size: 4vw 4vw;
+  background-size: 4vh 4vh;
   background-color: red;
 }
 .flagged-bomb {
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Emoji_u1f4a3.svg/256px-Emoji_u1f4a3.svg.png');
-  background-size: 4vw 4vw;
+  background-size: 4vh 4vh;
 }
 button {
-  margin: 0 0 3vw 0;
+  margin: 0 0 3vh 0;
   background-color: yellow;
+}
+select {
+  background-color: green;
 }

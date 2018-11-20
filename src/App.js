@@ -7,6 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      difficulty: 0,
       status: {
         id: 1,
         board: [
@@ -62,15 +63,21 @@ class App extends Component {
         })
       })
   }
-
-  newGame = event => {
-    let url = 'https://minesweeper-api.herokuapp.com/games'
-
-    axios.post(url).then(response => {
-      this.setState({
-        status: response.data
-      })
+  selectGameDifficulty = event => {
+    this.setState({
+      difficulty: parseInt(event.target.value)
     })
+  }
+  newGame = event => {
+    axios
+      .post('https://minesweeper-api.herokuapp.com/games', {
+        difficulty: this.state.difficulty
+      })
+      .then(response => {
+        this.setState({
+          status: response.data
+        })
+      })
   }
   gameStatus = () => {
     if (this.state.status.state === 'Start your game!') {
@@ -95,7 +102,15 @@ class App extends Component {
       <div className="App">
         <h1>Minesweeper</h1>
         <h3>{this.gameStatus()}</h3>
-        <button onClick={this.newGame}>New Game</button>
+        <button onClick={this.newGame}>New Game</button>{' '}
+        <select
+          value={this.state.difficulty}
+          onChange={this.selectGameDifficulty}
+        >
+          <option value="0">Easy</option>
+          <option value="1">Intermediate</option>
+          <option value="2">Expert</option>
+        </select>
         <table className="board">
           <tbody>
             {this.state.status.board.map((row, rowIndex) => (
